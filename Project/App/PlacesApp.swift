@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PlacesApp: App {
+    @StateObject private var viewModel = PlacesViewModel()
+
     var body: some Scene {
         WindowGroup {
-            PlacesListView()
+            PlacesView(viewModel: viewModel)
         }
     }
 }
