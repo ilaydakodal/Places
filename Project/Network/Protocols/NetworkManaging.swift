@@ -6,5 +6,5 @@
 //
 
 protocol NetworkManaging {
-    func fetch<T: Decodable>(from endpoint: Endpoints) async throws -> T
+    func fetch<T: Decodable>(from endpoint: EndpointProtocol) async throws -> T
 }

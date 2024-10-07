@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocationDTO: Codable {
+struct LocationDTO: Codable, Equatable {
     let name: String?
     let lat: Double
     let long: Double

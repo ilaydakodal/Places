@@ -28,20 +28,19 @@ final class PlacesViewModel: ObservableObject {
 
 extension PlacesViewModel {
 
-    // MARK: - Fetch Locations
     func fetchLocations() async {
-           isLoading = true
-           errorMessage = nil
+        isLoading = true
+        errorMessage = nil
 
-           do {
-               let locationsDTO: LocationsDTO = try await NetworkManager.shared.fetch(from: Endpoints.locations)
-               locations = locationsDTO.locations
-           } catch {
-               errorMessage = "Failed to fetch locations: \(error.localizedDescription)"
-           }
+        do {
+            let locationsDTO: LocationsDTO = try await networkManager.fetch(from: Endpoints.locations)
+            locations = locationsDTO.locations
+        } catch {
+            errorMessage = "Failed to fetch locations: \(error.localizedDescription)"
+        }
 
-           isLoading = false
-       }
+        isLoading = false
+    }
 
     // MARK: - Deep Linking
     func openLocationDeepLink(location: LocationDTO) {

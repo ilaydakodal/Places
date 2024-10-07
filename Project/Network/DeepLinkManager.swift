@@ -7,11 +7,19 @@
 
 import SwiftUI
 
+protocol DeepLinkManagerDelegate: AnyObject {
+    func didReceiveLocationDetails(latitude: Double?, longitude: Double?, name: String?)
+}
+
 final class DeepLinkManager: DeepLinkManaging {
 
     // MARK: - Properties
     private let baseDeepLinkURL = "wikipedia://places?"
     static let shared = DeepLinkManager()
+
+    var urlOpener: DeepLinkOpener = UIApplication.shared // Default opener
+
+    weak var delegate: DeepLinkManagerDelegate?
 
     func openDeepLink(for location: LocationDTO) {
         guard let deepLinkURL = makeDeepLinkURL(for: location) else {
@@ -19,7 +27,7 @@ final class DeepLinkManager: DeepLinkManaging {
             return
         }
 
-        UIApplication.shared.open(deepLinkURL, options: [:]) { success in
+        urlOpener.open(deepLinkURL, options: [:]) { success in
             if success {
                 print("🌐 Successfully opened deep link to \(location.name ?? "")")
             } else {
@@ -52,13 +60,11 @@ final class DeepLinkManager: DeepLinkManaging {
             }
         }
 
+        delegate?.didReceiveLocationDetails(latitude: latitude, longitude: longitude, name: name)
         print("🌐 Received deep link: Latitude: \(latitude ?? 0), Longitude: \(longitude ?? 0), Name: \(name ?? "Unknown")")
     }
-}
 
-// MARK: - Private
-extension DeepLinkManager {
-    private func makeDeepLinkURL(for location: LocationDTO) -> URL? {
+    func makeDeepLinkURL(for location: LocationDTO) -> URL? {
         var urlComponents = URLComponents(string: baseDeepLinkURL)
         urlComponents?.queryItems = [
             URLQueryItem(name: "latitude", value: String(location.lat)),

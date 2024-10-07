@@ -10,16 +10,16 @@ import Foundation
 final class NetworkManager: NetworkManaging {
 
     // MARK: Properties
-    private let urlSession: URLSession
+    private let urlSession: URLSessionProtocol
     static let shared = NetworkManager()
 
     // MARK: - Init
-    init(urlSession: URLSession = .shared) {
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
 
     // MARK: - Fetch Data
-    func fetch<T: Decodable>(from endpoint: Endpoints) async throws -> T {
+    func fetch<T: Decodable>(from endpoint: EndpointProtocol) async throws -> T {
         let url = try makeURL(from: endpoint)
         print("🌍 Fetching data from URL: \(url)")
 
@@ -36,7 +36,7 @@ final class NetworkManager: NetworkManaging {
 
 // MARK: - Helpers
 extension NetworkManager {
-    private func makeURL(from endpoint: Endpoints) throws -> URL {
+    private func makeURL(from endpoint: EndpointProtocol) throws -> URL {
         guard let url = endpoint.url() else {
             print("❌ Invalid URL")
             throw NetworkError.invalidURL
