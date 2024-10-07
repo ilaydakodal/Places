@@ -17,7 +17,7 @@ final class DeepLinkManager: DeepLinkManaging {
     private let baseDeepLinkURL = "wikipedia://places?"
     static let shared = DeepLinkManager()
 
-    var urlOpener: DeepLinkOpener = UIApplication.shared // Default opener
+    var urlOpener: DeepLinkOpener = UIApplication.shared
 
     weak var delegate: DeepLinkManagerDelegate?
 

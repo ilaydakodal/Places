@@ -26,6 +26,7 @@ struct PlacesView: View {
                     }
             }
             .navigationTitle("Places")
+            .accessibilityAddTraits(.isHeader)
             .onAppear {
                 Task {
                     await viewModel.fetchLocations()

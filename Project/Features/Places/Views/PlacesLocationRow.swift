@@ -19,6 +19,8 @@ struct LocationRow: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Coordinates for \(location.name ?? ""): Latitude \(location.lat) degrees, Longitude \(location.long) degrees.") // TODO: Localize & fix no name case
         }
     }
 }

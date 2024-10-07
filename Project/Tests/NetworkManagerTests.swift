@@ -58,7 +58,7 @@ final class NetworkManagerTests: XCTestCase {
 
     func testFetch_InvalidURL() async {
         // Given
-        let endpoint = InvalidURLMockEndpoint()
+        let endpoint = MockInvalidURLEndpoint()
 
         do {
             // When
