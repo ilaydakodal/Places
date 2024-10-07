@@ -1,6 +1,9 @@
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+*.xcworkspace
+*.xcuserstate
+*.xcodeproj/*
 
 ## User settings
 xcuserdata/
@@ -29,7 +32,9 @@ playground.xcworkspace
 # hence it is not needed unless you have added a package configuration file to your project
 # .swiftpm
 
-.build/
+.build
+DerivedData
+.DS_Store
 
 # CocoaPods
 #
